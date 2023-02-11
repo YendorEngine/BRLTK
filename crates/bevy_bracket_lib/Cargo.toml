@@ -5,11 +5,7 @@ publish = false
 version = "0.1.0"
 
 [dependencies]
-brltk_common = { path = "../common" }
-
-bevy = { version = "0.9", default-features = false }
-# bracket-bevy        = { git = "https://github.com/amethyst/bracket-lib" }
-# bracket-pathfinding = { git = "https://github.com/amethyst/bracket-lib" }
-
-bracket-bevy        = { path = "../../../bracket-lib/bracket-bevy" }
-bracket-pathfinding = { path = "../../../bracket-lib/bracket-pathfinding" }
+bevy                = { version = "0.9", default-features = false }
+bracket-bevy        = { git = "https://github.com/amethyst/bracket-lib" }
+bracket-pathfinding = { git = "https://github.com/amethyst/bracket-lib" }
+brltk_common        = { path = "../common" }

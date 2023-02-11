@@ -17,8 +17,11 @@ BRLTK lets you use [Bevy](https://github.com/bevyengine/bevy) with various rogue
     <a href="https://docs.rs/brltk">
         <img src="https://docs.rs/brltk/badge.svg" alt="Docs.io"/>
     </a>
-    <a href="https://github.com/YendorEngine/BRLTK">
-        <img src="https://github.com/YendorEngine/BRLTK/actions/workflows/rust.yml/badge.svg" alt="GitHub"/>
+    <a href="https://github.com/YendorEngine/BRLTK/actions">
+        <img src="https://github.com/bevyengine/bevy/workflows/CI/badge.svg" alt="CI"/>
+    </a>
+    <a href="https://discord.gg/vHaseWJp">
+        <img src="https://img.shields.io/discord/1027393534627692645?label=Discord&logo=Discord&style=plastic" alt="Discord"/>
     </a>
 </div>
 

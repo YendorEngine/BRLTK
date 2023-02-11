@@ -6,8 +6,8 @@ use crate::term::{
     default_gutter_size, SimpleConsoleFeatures, SparseConsoleFeatures, TerminalBuilderFont, TerminalLayer,
 };
 
-/// The Bevy Doryen plugin.
-#[derive(Clone, Default, Debug)]
+/// The `bracket-lib` backend.
+#[derive(Clone)]
 pub struct BracketLibBackend {
     pub(crate) gutter: f32,
     pub(crate) log_diagnostics: bool,
@@ -19,6 +19,12 @@ pub struct BracketLibBackend {
     pub(crate) palette: HashMap<String, RGBA>,
     pub(crate) scaling_mode: TerminalScalingMode,
     pub(crate) with_random_number_generator: bool,
+}
+
+impl Default for BracketLibBackend {
+    fn default() -> Self {
+        Self::empty()
+    }
 }
 
 impl Backend for BracketLibBackend {
