@@ -1,0 +1,15 @@
+[package]
+edition = "2021"
+name    = "bevy_doryen"
+publish = false
+version = "0.1.0"
+
+[dependencies]
+brltk_common = { path = "../common" }
+
+bevy      = { version = "0.9", default-features = false }
+doryen-rs = { path = "../../../doryen-rs" }
+image     = "0.24"
+
+[dev-dependencies]
+unicode-segmentation = "1"

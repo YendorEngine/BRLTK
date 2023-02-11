@@ -1,0 +1,37 @@
+[package]
+authors     = ["Jacob LeCoq <lecoqjacob@gmail.com>"]
+description = "A Bevy Rougelike Toolkit"
+edition     = "2021"
+license     = "Apache-2.0 OR MIT"
+name        = "brltk"
+readme      = "README.md"
+repository  = "https://github.com/YendorEngine/bevy_doryen"
+version     = "0.1.0"
+
+[workspace]
+exclude = ["benches"]
+members = [
+    "tools/ci",
+    # "tools/build-example-pages",
+    "tools/build-wasm-examples",
+    # "errors",
+    "crates/*",
+]
+resolver = "2"
+
+[features]
+default = ["bevy_doryen", "yendor_lib"]
+
+[dependencies]
+bevy_bracket_lib = { path = "crates/bevy_bracket_lib", optional = true }
+bevy_doryen      = { path = "crates/bevy_doryen", optional = true }
+brltk_common     = { path = "crates/common" }
+yendor_lib       = { path = "../../yendor", optional = true }
+
+bevy = { version = "0.9", default-features = false }
+
+[[example]]
+
+name              = "basic_bracket"
+path              = "examples/basic_bracket.rs"
+required-features = ["bevy_bracket_lib"]
