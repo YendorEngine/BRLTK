@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use bevy_doryen::{
-    doryen::TextAlign, DoryenAppOptions, DoryenBackend, DoryenInput, RenderSystemExt, ResizeMode, Resized,
-    RootConsole,
+    doryen::TextAlign, DoryenAppOptions, DoryenBackend, DoryenInput, RenderSystemExt, ResizeMode,
+    Resized, RootConsole,
 };
 use brltk_common::Backend;
 use doryen_rs::{DEFAULT_CONSOLE_HEIGHT, DEFAULT_CONSOLE_WIDTH};

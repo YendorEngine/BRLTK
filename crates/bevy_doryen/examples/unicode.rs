@@ -1,5 +1,7 @@
 use bevy::prelude::*;
-use bevy_doryen::{doryen::TextAlign, DoryenAppOptions, DoryenBackend, RenderSystemExt, RootConsole};
+use bevy_doryen::{
+    doryen::TextAlign, DoryenAppOptions, DoryenBackend, RenderSystemExt, RootConsole,
+};
 use brltk_common::Backend;
 const CONSOLE_WIDTH: u32 = 40;
 const CONSOLE_HEIGHT: u32 = 25;

@@ -1,9 +1,5 @@
-//! bevy_bracket_lib is a Bevy plugin that lets you use [`Bevy`] with the [`Bracket-Bevy`]
+//! `bevy_bracket_lib` is a Bevy plugin that lets you use `Bevy` with the `bracket_bevy`
 //! roguelike library.
-//!
-//! Usage:
-//! ```no_run
-//! ```
 //!
 //! [Bevy]: https://bevyengine.org/
 //! [Bracket-lib]: https://github.com/amethyst/bracket-lib

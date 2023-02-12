@@ -3,7 +3,8 @@ use bracket_bevy::{prelude::RGBA, *};
 use brltk_common::Backend;
 
 use crate::term::{
-    default_gutter_size, SimpleConsoleFeatures, SparseConsoleFeatures, TerminalBuilderFont, TerminalLayer,
+    default_gutter_size, SimpleConsoleFeatures, SparseConsoleFeatures, TerminalBuilderFont,
+    TerminalLayer,
 };
 
 /// The `bracket-lib` backend.
@@ -61,7 +62,7 @@ impl Backend for BracketLibBackend {
                         bterm = bterm.with_background(false);
                     }
                     bterm
-                },
+                }
                 TerminalLayer::Sparse {
                     font_index,
                     width,
@@ -73,7 +74,7 @@ impl Backend for BracketLibBackend {
                         bterm = bterm.with_background(false);
                     }
                     bterm
-                },
+                }
             }
         }
 
@@ -157,14 +158,14 @@ impl BracketLibBackend {
                     } else {
                         features.insert(SimpleConsoleFeatures::WithoutBackground);
                     }
-                },
+                }
                 TerminalLayer::Sparse { features, .. } => {
                     if with_background {
                         features.remove(&SparseConsoleFeatures::WithoutBackground);
                     } else {
                         features.insert(SparseConsoleFeatures::WithoutBackground);
                     }
-                },
+                }
             }
         }
         self

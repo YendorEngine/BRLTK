@@ -139,7 +139,9 @@ fn update_alpha(mut console_query: Query<(&mut Alpha, &Console)>) {
     }
 }
 
-fn update_step(mut step: ResMut<Step>) { step.0 = (step.0 + 1) % 10; }
+fn update_step(mut step: ResMut<Step>) {
+    step.0 = (step.0 + 1) % 10;
+}
 
 fn render(
     mut root_console: ResMut<RootConsole>,
@@ -152,7 +154,11 @@ fn render(
             root_console.back(
                 x,
                 y,
-                if (x + y) & 1 == 1 { (96, 64, 32, 255) } else { (32, 64, 96, 255) },
+                if (x + y) & 1 == 1 {
+                    (96, 64, 32, 255)
+                } else {
+                    (32, 64, 96, 255)
+                },
             );
         }
     }
@@ -166,7 +172,11 @@ fn render(
     );
 
     for (position, alpha, key_color, console) in console_query.iter() {
-        let alpha = if alpha.inverted { 1.0 - alpha.value } else { alpha.value };
+        let alpha = if alpha.inverted {
+            1.0 - alpha.value
+        } else {
+            alpha.value
+        };
         console.0.blit(
             position.x,
             position.y,

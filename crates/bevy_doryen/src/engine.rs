@@ -28,7 +28,11 @@ impl DoryenEngine {
         swap(api.con(), self.swap_console.as_mut().unwrap());
 
         // Insert it into the DoryenRootConsole resource
-        let mut doryen_root_console = self.bevy_app.world.get_resource_mut::<RootConsole>().unwrap();
+        let mut doryen_root_console = self
+            .bevy_app
+            .world
+            .get_resource_mut::<RootConsole>()
+            .unwrap();
         doryen_root_console.0 = self.swap_console.take();
     }
 
@@ -37,7 +41,11 @@ impl DoryenEngine {
         use std::mem::swap;
 
         // Take the root console out of the DoryenRootConsole resource
-        let mut doryen_root_console = self.bevy_app.world.get_resource_mut::<RootConsole>().unwrap();
+        let mut doryen_root_console = self
+            .bevy_app
+            .world
+            .get_resource_mut::<RootConsole>()
+            .unwrap();
         self.swap_console = doryen_root_console.0.take();
 
         // Hand ownership of the Doryen root console back to Doryen
@@ -46,28 +54,40 @@ impl DoryenEngine {
 
     #[inline]
     fn take_doryen_render_schedule(&mut self) -> Schedule {
-        let mut doryen_render_systems =
-            self.bevy_app.world.get_resource_mut::<DoryenRenderSystems>().unwrap();
+        let mut doryen_render_systems = self
+            .bevy_app
+            .world
+            .get_resource_mut::<DoryenRenderSystems>()
+            .unwrap();
         doryen_render_systems.0.take().unwrap()
     }
 
     #[inline]
     fn restore_doryen_render_schedule(&mut self, doryen_render_schedule: Schedule) {
-        let mut doryen_render_systems =
-            self.bevy_app.world.get_resource_mut::<DoryenRenderSystems>().unwrap();
+        let mut doryen_render_systems = self
+            .bevy_app
+            .world
+            .get_resource_mut::<DoryenRenderSystems>()
+            .unwrap();
         doryen_render_systems.0.replace(doryen_render_schedule);
     }
 
     #[inline]
     fn handle_input(&mut self, api: &mut dyn DoryenApi) {
         let input = api.input();
-        let mut doryen_input = self.bevy_app.world.get_resource_mut::<DoryenInput>().unwrap();
+        let mut doryen_input = self
+            .bevy_app
+            .world
+            .get_resource_mut::<DoryenInput>()
+            .unwrap();
         doryen_input.handle_input(&self.mouse_button_listeners, input);
     }
 }
 
 impl Engine for DoryenEngine {
-    fn init(&mut self, _api: &mut dyn DoryenApi) { self.bevy_app.init_resource::<DoryenInput>(); }
+    fn init(&mut self, _api: &mut dyn DoryenApi) {
+        self.bevy_app.init_resource::<DoryenInput>();
+    }
 
     fn update(&mut self, api: &mut dyn DoryenApi) -> Option<UpdateEvent> {
         let mut doryen_fps_info = self.bevy_app.world.get_resource_mut::<FpsInfo>().unwrap();
@@ -81,16 +101,26 @@ impl Engine for DoryenEngine {
         self.restore_root_console_ownership(api);
 
         // Process the latest SetFontPath event
-        let doryen_set_font_path_events =
-            self.bevy_app.world.get_resource_mut::<Events<SetFontPath>>().unwrap();
-        if let Some(doryen_set_font_path) =
-            self.set_font_path_event_reader.iter(&doryen_set_font_path_events).last()
+        let doryen_set_font_path_events = self
+            .bevy_app
+            .world
+            .get_resource_mut::<Events<SetFontPath>>()
+            .unwrap();
+        if let Some(doryen_set_font_path) = self
+            .set_font_path_event_reader
+            .iter(&doryen_set_font_path_events)
+            .last()
         {
             api.set_font_path(&format!("assets/{}", doryen_set_font_path.0.as_ref()));
         }
 
         if let Some(app_exit_events) = self.bevy_app.world.get_resource_mut::<Events<AppExit>>() {
-            if self.app_exit_event_reader.iter(&app_exit_events).last().is_some() {
+            if self
+                .app_exit_event_reader
+                .iter(&app_exit_events)
+                .last()
+                .is_some()
+            {
                 return Some(UpdateEvent::Exit);
             }
         }
@@ -123,7 +153,11 @@ impl Engine for DoryenEngine {
         let (previous_width, previous_height) = self.previous_screen_size;
         let (new_width, new_height) = api.get_screen_size();
 
-        let mut resized_events = self.bevy_app.world.get_resource_mut::<Events<Resized>>().unwrap();
+        let mut resized_events = self
+            .bevy_app
+            .world
+            .get_resource_mut::<Events<Resized>>()
+            .unwrap();
         let resized = Resized {
             previous_width,
             previous_height,
@@ -143,7 +177,7 @@ impl Engine for DoryenEngine {
                 let new_console_width = new_width / w_ratio;
                 let new_console_height = new_height / h_ratio;
                 api.con().resize(new_console_width, new_console_height);
-            },
+            }
             ResizeMode::Callback(callback) => {
                 self.take_root_console_ownership(api);
                 callback(
@@ -151,7 +185,7 @@ impl Engine for DoryenEngine {
                     resized,
                 );
                 self.restore_root_console_ownership(api);
-            },
+            }
         }
 
         self.previous_screen_size = (new_width, new_height);

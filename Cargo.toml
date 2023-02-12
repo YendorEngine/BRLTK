@@ -23,12 +23,12 @@ resolver = "2"
 default = ["bevy_doryen", "yendor_lib"]
 
 [dependencies]
-bevy_bracket_lib = { path = "crates/bevy_bracket_lib", optional = true }
-bevy_doryen      = { path = "crates/bevy_doryen", optional = true }
-brltk_common     = { path = "crates/common" }
-yendor_lib       = { path = "../../yendor", optional = true }
+bevy_bracket_lib = { path = "crates/bevy_bracket_lib", optional = true, version = "0.1" }
+bevy_doryen      = { path = "crates/bevy_doryen", optional = true, version = "0.1" }
+brltk_common     = { path = "crates/common", version = "0.1" }
+yendor_lib       = { path = "../../yendor", optional = true, version = "0.1" }
 
-bevy = { version = "0.9", default-features = false }
+bevy = { version = "0.9", default-features = false, features = ["bevy_render"] }
 
 [[example]]
 

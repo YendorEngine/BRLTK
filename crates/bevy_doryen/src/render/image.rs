@@ -39,8 +39,10 @@ impl DoryenImage {
     }
 
     /// Check if the image has been loaded.
-    /// Since there's no background thread doing the work for you, you have to call some method on image for it to actually load.
-    /// Use either [`Image::try_load`], [`Image::get_size`], [`Image::blit`] or [`Image::blit_ex`] to run the loading code.
+    /// Since there's no background thread doing the work for you, you have to call some method
+    /// on image for it to actually load. Use either [`Image::try_load`],
+    /// [`DoryenImage::try_get_size`], [`DoryenImage::blit`] or [`DoryenImage::blit_ex`] to run
+    /// the loading code.
     pub fn try_load(&mut self) -> bool {
         self.0.try_load()
     }
@@ -58,6 +60,7 @@ impl DoryenImage {
     pub fn blit(&mut self, con: &mut Console, x: i32, y: i32, transparent: Option<Color>) {
         self.0.blit(con, x, y, transparent)
     }
+
     /// blit an image on a console
     ///
     /// x,y are the coordinate of the image center in the console
@@ -74,21 +77,23 @@ impl DoryenImage {
         angle: f32,
         transparent: Option<Color>,
     ) {
-        self.0.blit_ex(con, x, y, scalex, scaley, angle, transparent)
+        self.0
+            .blit_ex(con, x, y, scalex, scaley, angle, transparent)
     }
 
-    /// blit an image on the console, using the subcell characters to achieve twice the normal resolution.
-    /// This uses the CHAR_SUBCELL_* ascii codes (from 226 to 232):
+    /// blit an image on the console, using the subcell characters to achieve twice the normal
+    /// resolution. This uses the `CHAR_SUBCELL_*`
+    ///  ascii codes (from 226 to 232):
     ///
-    /// ![subcell_chars](https://raw.githubusercontent.com/jice-nospam/doryen-rs/master/docs/subcell/subcell.png)
+    /// ![`subcell_chars`](https://raw.githubusercontent.com/jice-nospam/doryen-rs/master/docs/subcell/subcell.png)
     ///
     /// Comparison before/after subcell in the chronicles of Doryen :
     ///
-    /// ![subcell_comp](https://raw.githubusercontent.com/jice-nospam/doryen-rs/master/docs/subcell/subcell_comp.png)
+    /// ![`subcell_comp`](https://raw.githubusercontent.com/jice-nospam/doryen-rs/master/docs/subcell/subcell_comp.png)
     ///
     /// Pyromancer! screenshot, making full usage of subcell resolution:
     ///
-    /// ![subcell_pyro](https://raw.githubusercontent.com/jice-nospam/doryen-rs/master/docs/subcell/subcell_pyro.png)
+    /// ![`subcell_pyro`](https://raw.githubusercontent.com/jice-nospam/doryen-rs/master/docs/subcell/subcell_pyro.png)
     #[allow(clippy::too_many_arguments)]
     pub fn blit_2x(
         &mut self,

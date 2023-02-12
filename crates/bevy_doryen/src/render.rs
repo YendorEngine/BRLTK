@@ -13,7 +13,8 @@ pub use self::image::*;
 pub struct DoryenRenderPlugin;
 impl Plugin for DoryenRenderPlugin {
     fn build(&self, app: &mut App) {
-        app.init_resource::<RenderState>().init_resource::<DoryenRenderSystems>();
+        app.init_resource::<RenderState>()
+            .init_resource::<DoryenRenderSystems>();
     }
 }
 

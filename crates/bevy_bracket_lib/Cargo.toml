@@ -1,5 +1,6 @@
 [package]
 edition = "2021"
+license = "Apache-2.0 OR MIT"
 name    = "bevy_bracket_lib"
 publish = false
 version = "0.1.0"
@@ -8,4 +9,4 @@ version = "0.1.0"
 bevy                = { version = "0.9", default-features = false }
 bracket-bevy        = { git = "https://github.com/amethyst/bracket-lib" }
 bracket-pathfinding = { git = "https://github.com/amethyst/bracket-lib" }
-brltk_common        = { path = "../common" }
+brltk_common        = { path = "../common", version = "0.1" }

@@ -42,7 +42,10 @@ fn main() {
     }
     .build(&mut app);
 
-    app.add_startup_system(init).add_system(update_circle).add_doryen_render_system(render).run();
+    app.add_startup_system(init)
+        .add_system(update_circle)
+        .add_doryen_render_system(render)
+        .run();
 }
 
 fn init(mut commands: Commands) {

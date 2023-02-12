@@ -51,10 +51,17 @@ fn main() {
     }
     .build(&mut app);
 
-    app.init_resource::<Font>().add_system(update).add_doryen_render_system(render).run();
+    app.init_resource::<Font>()
+        .add_system(update)
+        .add_doryen_render_system(render)
+        .run();
 }
 
-fn update(mut font: ResMut<Font>, input: Res<DoryenInput>, mut set_font_path: EventWriter<SetFontPath>) {
+fn update(
+    mut font: ResMut<Font>,
+    input: Res<DoryenInput>,
+    mut set_font_path: EventWriter<SetFontPath>,
+) {
     let mut font_path = None;
     if input.key_released(doryen_rs::ScanCode::A) {
         font.current_font = (font.current_font + 1) % FONTS.len();

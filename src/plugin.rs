@@ -1,4 +1,4 @@
-use bevy::prelude::{App as BevyApp, Plugin};
+use bevy::prelude::{App as BevyApp, Msaa, Plugin};
 use bevy_doryen::DoryenBackend;
 
 use crate::prelude::*;
@@ -19,12 +19,12 @@ impl Default for BRLTKPlugin {
 }
 
 impl BRLTKPlugin {
-    /// Create a new BRLTKPlugin.
+    /// Create a new [`BRLTKPlugin`].
     pub fn new() -> Self {
         Self::default()
     }
 
-    /// Create a new BRLTKPlugin with the given [`Backend`].
+    /// Create a new [`BRLTKPlugin`] with the given [`Backend`].
     pub fn with_backend(backend: impl Backend + 'static) -> Self {
         Self {
             backend: Box::new(backend),
@@ -34,7 +34,7 @@ impl BRLTKPlugin {
 
 impl Plugin for BRLTKPlugin {
     fn build(&self, app: &mut BevyApp) {
-        app.insert_resource(bevy::prelude::Msaa { samples: 1 });
+        app.insert_resource(Msaa { samples: 1 });
 
         // Build the backend.
         self.backend.build(app);

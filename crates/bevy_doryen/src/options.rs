@@ -2,7 +2,8 @@
 use std::ops::{Deref, DerefMut};
 
 use bevy::prelude::Resource;
-use doryen_rs::Console;
+#[allow(unused_imports)]
+use doryen_rs::{AppOptions as DoryenAppOptions, Console};
 
 use crate::event::Resized;
 
@@ -15,7 +16,11 @@ impl std::fmt::Debug for RootConsole {
         f.debug_struct("RootConsole")
             .field(
                 "0",
-                if self.0.is_some() { &"<present>" } else { &"<absent>" },
+                if self.0.is_some() {
+                    &"<present>"
+                } else {
+                    &"<absent>"
+                },
             )
             .finish()
     }
@@ -26,29 +31,33 @@ impl Deref for RootConsole {
 
     #[inline]
     fn deref(&self) -> &Self::Target {
-        self.0.as_ref().expect("Inner value should always be set during `update` and `render` phases")
+        self.0
+            .as_ref()
+            .expect("Inner value should always be set during `update` and `render` phases")
     }
 }
 
 impl DerefMut for RootConsole {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
-        self.0.as_mut().expect("Inner value should always be set during `update` and `render` phases")
+        self.0
+            .as_mut()
+            .expect("Inner value should always be set during `update` and `render` phases")
     }
 }
 
-/// This resource contains the values given by [`fps`](DoryenApi::fps) and
-/// [`average_fps`](DoryenApi::average_fps) on the current update tick.
+/// This resource contains the values given by [`fps`](doryen_rs::DoryenApi::fps) and
+/// [`average_fps`](doryen_rs::DoryenApi::average_fps) on the current update tick.
 #[derive(Default, Debug, Clone, Copy, Resource)]
 pub struct FpsInfo {
-    /// The value given by [`fps`](DoryenApi::fps) on the current update tick.
+    /// The value given by [`fps`](doryen_rs::DoryenApi::fps) on the current update tick.
     pub fps: u32,
-    /// The value given by [`average_fps`](DoryenApi::average_fps) on the
+    /// The value given by [`doryen_rs::DoryenApi::average_fps`] on the
     /// current update tick.
     pub average_fps: u32,
 }
 
-/// How the [`DoryenPlugin`] reacts to the resize event from Doryen.
+/// How the application reacts to the resize event from `doryen-rs`.
 #[derive(Clone, Copy, Default)]
 pub enum ResizeMode {
     /// Do nothing when the window is resized. This is the default behavior.

@@ -1,14 +1,15 @@
 [package]
 edition = "2021"
+license = "Apache-2.0 OR MIT"
 name    = "bevy_doryen"
 publish = false
 version = "0.1.0"
 
 [dependencies]
-brltk_common = { path = "../common" }
+brltk_common = { path = "../common", version = "0.1" }
 
 bevy      = { version = "0.9", default-features = false }
-doryen-rs = { git = "https://github.com/YendorEngine/doryen-rs", branch = "custom" }
+doryen-rs = { git = "https://github.com/YendorEngine/doryen-rs", branch = "custom", version = "1.4.0" }
 image     = "0.24"
 
 [dev-dependencies]

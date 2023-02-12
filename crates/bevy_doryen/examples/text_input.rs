@@ -25,7 +25,10 @@ fn main() {
     }
     .build(&mut app);
 
-    app.init_resource::<TextInput>().add_system(update).add_doryen_render_system(render).run();
+    app.init_resource::<TextInput>()
+        .add_system(update)
+        .add_doryen_render_system(render)
+        .run();
 }
 
 fn update(input: Res<DoryenInput>, mut text_input: ResMut<TextInput>) {
@@ -59,7 +62,11 @@ fn render(mut root_console: ResMut<RootConsole>, text_input: Res<TextInput>) {
             "Type some text : {}{}",
             text_input.text,
             // blinking cursor
-            if text_input.cursor % 25 < 12 { '_' } else { ' ' }
+            if text_input.cursor % 25 < 12 {
+                '_'
+            } else {
+                ' '
+            }
         ),
         TextAlign::Left,
         Some(WHITE),

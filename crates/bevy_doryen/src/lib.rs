@@ -1,56 +1,5 @@
-//! bevy_doryen is a Bevy plugin that lets you use [`Bevy`] with the [`Doryen`]
+//! `bevy_doryen` is a Bevy plugin that lets you use `Bevy` with the `doryen-rs`
 //! roguelike library.
-//!
-//! Usage:
-//! ```no_run
-//! # use bevy_app::App;
-//! # use bevy_doryen::{
-//! #     DoryenPluginSettings,
-//! #     DoryenPlugin,
-//! #     RenderSystemExtensions,
-//! #     ResizeMode,
-//! #     MouseButton
-//! # };
-//! # use bevy_doryen::doryen::DoryenAppOptions;
-//! # use bevy_ecs::system::IntoSystem;
-//! App::build()
-//!     // Insert a `DoryenPluginSettings` resource to configure the plugin.
-//!     .insert_resource(DoryenPluginSettings {
-//!         // `app_options` lets you configure Doryen just as if you were
-//!         // using Doryen without Bevy. The default is `DoryenAppOptions::default()`.
-//!         app_options: DoryenAppOptions {
-//!             show_cursor: true,
-//!             resizable: true,
-//!             ..DoryenAppOptions::default()
-//!         },
-//!         // Lets you configure which mouse buttons to listen for. The default
-//!         // is left, middle and right click.
-//!         mouse_button_listeners: vec![
-//!             MouseButton::Left,
-//!             MouseButton::Middle,
-//!             MouseButton::Right,
-//!         ],
-//!         // Lets you configure how the application should behave when resized.
-//!         // The default is `ResizeMode::Nothing`. See `ResizeMode`'s
-//!         // documentation for more information.
-//!         resize_mode: ResizeMode::Nothing
-//!     })
-//!     // Add the `DoryenPlugin` to Bevy.
-//!     .add_plugin(DoryenPlugin)
-//!     // Add your Bevy systems like usual. Excluding startup systems, which
-//!     // only run once, these systems are run during Doryen's update phase;
-//!     // i.e. 60 times per second.
-//!     .add_startup_system(init.system())
-//!     .add_system(input.system())
-//!     // The `RenderSystemExtensions` trait lets you add systems that should
-//!     // be run during Doryen's render phase.
-//!     .add_doryen_render_system(render.system())
-//! .run();
-//!
-//! # fn init() { }
-//! # fn input() { }
-//! # fn render() { }
-//! ```
 //!
 //! [Bevy]: https://bevyengine.org/
 //! [Doryen]: https://github.com/jice-nospam/doryen-rs
@@ -58,10 +7,11 @@
 #![forbid(unsafe_code)]
 #![warn(missing_docs)]
 
-use crate::engine::DoryenEngine;
 use bevy::{ecs::event::ManualEventReader, prelude::App as BevyApp};
 use brltk_common::Backend;
 use doryen_rs::{App as DoryenApp, Console, MouseButton};
+
+use crate::engine::DoryenEngine;
 
 mod engine;
 mod event;
@@ -101,7 +51,8 @@ pub struct DoryenBackend {
 impl Backend for DoryenBackend {
     fn build(&self, app: &mut bevy::app::App) {
         // Resources
-        app.init_resource::<FpsInfo>().init_resource::<RootConsole>();
+        app.init_resource::<FpsInfo>()
+            .init_resource::<RootConsole>();
 
         app.add_plugin(crate::event::DoryenEventPlugin)
             .add_plugin(crate::input::DoryenInputPlugin)
@@ -140,7 +91,11 @@ impl Default for DoryenBackend {
         Self {
             resize_mode: ResizeMode::Nothing,
             app_options: DoryenAppOptions::default(),
-            mouse_button_listeners: vec![MouseButton::Left, MouseButton::Middle, MouseButton::Right],
+            mouse_button_listeners: vec![
+                MouseButton::Left,
+                MouseButton::Middle,
+                MouseButton::Right,
+            ],
         }
     }
 }

@@ -1,10 +1,11 @@
 //! Input handling for `doryten-rs` input back to bevy.
 
+use std::collections::HashMap;
+
 use bevy::prelude::{App, Plugin, Resource};
 use doryen_rs::{Keys, MouseButton, ScanCode};
 
 use crate::doryen::InputApi;
-use std::collections::HashMap;
 
 /// The Bevy Doryen input plugin to handle interloping
 /// input events from `doryen-rs` to `Bevy`.
@@ -46,7 +47,11 @@ impl DoryenInput {
         self.mouse_buttons_released.clear();
     }
 
-    pub(crate) fn handle_input(&mut self, mouse_button_listeners: &[MouseButton], input: &mut dyn InputApi) {
+    pub(crate) fn handle_input(
+        &mut self,
+        mouse_button_listeners: &[MouseButton],
+        input: &mut dyn InputApi,
+    ) {
         self.on_frame();
 
         self.handle_pressed(input.keys_pressed());

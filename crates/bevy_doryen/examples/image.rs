@@ -31,7 +31,10 @@ fn main() {
     }
     .build(&mut app);
 
-    app.init_resource::<SkullImage>().add_system(update).add_doryen_render_system(render).run();
+    app.init_resource::<SkullImage>()
+        .add_system(update)
+        .add_doryen_render_system(render)
+        .run();
 }
 
 fn update(mut skull: ResMut<SkullImage>) {

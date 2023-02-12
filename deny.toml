@@ -3,6 +3,8 @@ db-path = "~/.cargo/advisory-db"
 db-urls = ["https://github.com/rustsec/advisory-db"]
 ignore = [
     "RUSTSEC-2020-0056", # from cpal v0.14.1 - unmaintained - https://github.com/koute/stdweb/issues/403
+    "RUSTSEC-2022-0048", # from quick-xml v0.8.4 unmaintained - https://github.com/netvl/xml-rs/issues/221
+    "RUSTSEC-2020-0071", # from time v0.1.45 unmaintained - https://github.com/time-rs/time/issues/293
 ]
 notice = "deny"
 unmaintained = "deny"
@@ -23,7 +25,14 @@ allow = [
 ]
 copyleft = "deny"
 default = "deny"
-exceptions = [{ name = "unicode-ident", allow = ["Unicode-DFS-2016"] }]
+exceptions = [
+    { name = "unicode-ident", allow = [
+        "Unicode-DFS-2016",
+    ] },
+    { name = "dwrote", allow = [
+        "MPL-2.0",
+    ] },
+]
 unlicensed = "deny"
 
 [bans]
@@ -32,18 +41,28 @@ multiple-versions = "deny"
 wildcards         = "deny"
 # Certain crates/versions that will be skipped when doing duplicate detection.
 skip = [
-    { name = "ndk-sys", version = "0.3" },               # from rodio v0.16.0
-    { name = "ndk", version = "0.6" },                   # from rodio v0.16.0
-    { name = "raw-window-handle", version = "0.4" },     # from winit v0.27.4
-    { name = "nix", version = "0.23" },                  # from cpal v0.14.1
-    { name = "rustc_version", version = "0.2" },         # from postcard v1.0.2
-    { name = "semver", version = "0.9" },                # from postcard v1.0.2
+    { name = "memoffset", version = "0.6.5" },            # from rodio v0.16.0
+    { name = "ndk-sys", version = "0.3" },                # from rodio v0.16.0
+    { name = "foreign-types-shared", version = "0.1.1" }, # from winit v0.27.4
+    { name = "foreign-types", version = "0.3.2" },        # from postcard v1.0.2
+    { name = "nix", version = "0.23" },                   # from cpal v0.14.1
+    { name = "nix", version = "0.24" },                   # from cpal v0.14.1
+    { name = "concurrent-queue", version = "1.2.4" },     # from postcard v1.0.2
+    { name = "wasi", version = "0.10" },                  # from rodio v0.16.0
+    { name = "windows-sys", version = "0.36" },           # from notify v5.0.0
+    { name = "windows-sys", version = "0.42" },           # from notify v5.0.0
+    { name = "raw-window-handle", version = "0.4.3" },    # from notify v5.0.0
+
+    { name = "ndk", version = "0.6" },                 # from notify v5.0.0
+    { name = "arrayvec", version = "0.5.2" },          # from notify v5.0.0
+    { name = "raw-window-handle", version = "0.4.3" }, # from notify v5.0.0
+    { name = "raw-window-handle", version = "0.4.3" }, # from notify v5.0.0
+
     { name = "windows_aarch64_msvc", version = "0.36" }, # from notify v5.0.0
     { name = "windows_i686_gnu", version = "0.36" },     # from notify v5.0.0
     { name = "windows_i686_msvc", version = "0.36" },    # from notify v5.0.0
     { name = "windows_x86_64_gnu", version = "0.36" },   # from notify v5.0.0
     { name = "windows_x86_64_msvc", version = "0.36" },  # from notify v5.0.0
-    { name = "windows-sys", version = "0.36" },          # from notify v5.0.0
     { name = "windows", version = "0.37" },              # from rodio v0.16.0
     { name = "windows_aarch64_msvc", version = "0.37" }, # from rodio v0.16.0
     { name = "windows_i686_gnu", version = "0.37" },     # from rodio v0.16.0
@@ -53,7 +72,11 @@ skip = [
 ]
 
 [sources]
-allow-git        = []
-allow-registry   = ["https://github.com/rust-lang/crates.io-index"]
-unknown-git      = "deny"
+allow-git = [
+    "https://github.com/unrust/uni-gl",
+    "https://github.com/unrust/uni-app",
+    "https://github.com/YendorEngine/doryen-rs",
+]
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+unknown-git = "deny"
 unknown-registry = "deny"

@@ -7,16 +7,18 @@ use bevy::prelude::{App, Plugin};
 /// Event plugin for handling `doryten-rs` events.
 pub struct DoryenEventPlugin;
 impl Plugin for DoryenEventPlugin {
-    fn build(&self, app: &mut App) { app.add_event::<SetFontPath>().add_event::<Resized>(); }
+    fn build(&self, app: &mut App) {
+        app.add_event::<SetFontPath>().add_event::<Resized>();
+    }
 }
 
 /// When you want to change Doryen's font path, emit an event of this type.
-/// bevy_doryen will call [`set_font_path`](DoryenApi::set_font_path) with the
+/// `bevy_doryen` will call [`set_font_path`](doryen_rs::DoryenApi) with the
 /// provided value.
 #[derive(Debug, Clone)]
 pub struct SetFontPath(pub Cow<'static, str>);
 
-/// Resized event object. Whenever Doryen's [`resize`](Engine::resize) method is
+/// Resized event object. Whenever Doryen's [`resize`](doryen_rs::Engine::resize) method is
 /// called, an event of this type is emitted.
 #[derive(Debug, Clone, Copy)]
 pub struct Resized {

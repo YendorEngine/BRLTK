@@ -62,7 +62,10 @@ fn main() {
     }
     .build(&mut app);
 
-    app.add_startup_system(init).add_system(input).add_doryen_render_system(render).run();
+    app.add_startup_system(init)
+        .add_system(input)
+        .add_doryen_render_system(render)
+        .run();
 }
 
 fn init(mut root_console: ResMut<RootConsole>, mut commands: Commands) {
@@ -96,7 +99,9 @@ fn input(
     mut player_query: Query<(&mut Position<i32>, &Player)>,
     mut mouse_query: Query<(&mut Position<f32>, &Mouse)>,
 ) {
-    let mut player_position = player_query.get_component_mut::<Position<i32>>(entities.player).unwrap();
+    let mut player_position = player_query
+        .get_component_mut::<Position<i32>>(entities.player)
+        .unwrap();
 
     if input.key(VirtualScanCode::Left) {
         player_position.x = (player_position.x - 1).max(1);
@@ -109,7 +114,9 @@ fn input(
         player_position.y = (player_position.y + 1).min(CONSOLE_HEIGHT as i32 - 2);
     }
 
-    let mut mouse_position = mouse_query.get_component_mut::<Position<f32>>(entities.mouse).unwrap();
+    let mut mouse_position = mouse_query
+        .get_component_mut::<Position<f32>>(entities.mouse)
+        .unwrap();
 
     let new_mouse_position = input.mouse_position();
     mouse_position.x = new_mouse_position.0;
@@ -141,7 +148,9 @@ fn render(
         Some('&' as u16),
     );
 
-    let player_position = player_query.get_component::<Position<i32>>(entities.player).unwrap();
+    let player_position = player_query
+        .get_component::<Position<i32>>(entities.player)
+        .unwrap();
 
     root_console.ascii(player_position.x, player_position.y, '@' as u16);
     root_console.fore(player_position.x, player_position.y, (255, 255, 255, 255));
@@ -153,7 +162,9 @@ fn render(
         None,
     );
 
-    let mouse_position = mouse_query.get_component::<Position<f32>>(entities.mouse).unwrap();
+    let mouse_position = mouse_query
+        .get_component::<Position<f32>>(entities.mouse)
+        .unwrap();
 
     root_console.print_color(
         (CONSOLE_WIDTH / 2) as i32,
