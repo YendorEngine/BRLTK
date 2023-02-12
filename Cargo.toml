@@ -20,7 +20,9 @@ members = [
 resolver = "2"
 
 [features]
-default = ["bevy_doryen", "yendor_lib"]
+bracket = ["bevy_bracket_lib"]
+default = ["doryen", "yendor_lib"]
+doryen  = ["bevy_doryen"]
 
 [dependencies]
 bevy = { version = "0.9", default-features = false, features = ["bevy_render"] }
