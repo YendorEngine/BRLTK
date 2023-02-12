@@ -23,8 +23,8 @@ jobs:
           components: rustfmt, clippy
           override: true
 
-      # - name: Cache Cargo build files
-      #   uses: Leafwing-Studios/cargo-cache@v1.0.0
+      - name: Cache Cargo build files
+        uses: Leafwing-Studios/cargo-cache@v1.0.0
 
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev libwayland-dev libxkbcommon-dev
@@ -43,8 +43,8 @@ jobs:
           toolchain: stable
           override: true
 
-      # - name: Cache Cargo build files
-      #   uses: Leafwing-Studios/cargo-cache@v1.0.0
+      - name: Cache Cargo build files
+        uses: Leafwing-Studios/cargo-cache@v1.0.0
 
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
@@ -65,8 +65,8 @@ jobs:
           toolchain: stable
           override: true
 
-      # - name: Cache Cargo build files
-      #   uses: Leafwing-Studios/cargo-cache@v1.0.0
+      - name: Cache Cargo build files
+        uses: Leafwing-Studios/cargo-cache@v1.0.0
 
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
@@ -83,8 +83,8 @@ jobs:
         with:
           toolchain: stable
 
-      # - name: Cache Cargo build files
-      #   uses: Leafwing-Studios/cargo-cache@v1.0.0
+      - name: Cache Cargo build files
+        uses: Leafwing-Studios/cargo-cache@v1.0.0
 
       - name: Install alsa and udev
         run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev libwayland-dev libxkbcommon-dev

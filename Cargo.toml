@@ -13,7 +13,7 @@ exclude = ["benches"]
 members = [
     "tools/ci",
     # "tools/build-example-pages",
-    "tools/build-wasm-examples",
+    # "tools/build-wasm-examples",
     # "errors",
     "crates/*",
 ]
@@ -23,15 +23,15 @@ resolver = "2"
 default = ["bevy_doryen", "yendor_lib"]
 
 [dependencies]
-bevy_bracket_lib = { path = "crates/bevy_bracket_lib", optional = true, version = "0.1" }
-bevy_doryen      = { path = "crates/bevy_doryen", optional = true, version = "0.1" }
-brltk_common     = { path = "crates/common", version = "0.1" }
-yendor_lib       = { path = "../../yendor", optional = true, version = "0.1" }
-
 bevy = { version = "0.9", default-features = false, features = ["bevy_render"] }
+bevy_bracket_lib = { path = "crates/bevy_bracket_lib", optional = true, version = "0.1" }
+bevy_doryen = { path = "crates/bevy_doryen", optional = true, version = "0.1" }
+brltk_common = { path = "crates/common", version = "0.1" }
+yendor_lib = { git = "https://github.com/YendorEngine/yendor", optional = true, version = "0.1", features = [
+    "roguelike",
+] }
 
 [[example]]
-
 name              = "basic_bracket"
 path              = "examples/basic_bracket.rs"
 required-features = ["bevy_bracket_lib"]
