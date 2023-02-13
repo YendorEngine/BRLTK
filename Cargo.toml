@@ -22,7 +22,7 @@ resolver = "2"
 [features]
 ascii_terminal = ["bevy_ascii_terminal"]
 bracket_lib    = ["bevy_bracket_lib"]
-default        = ["doryen", "yendor_lib", "ascii_terminal"]
+default        = ["doryen", "yendor_lib"]
 doryen         = ["bevy_doryen"]
 
 [dependencies]
@@ -35,10 +35,63 @@ yendor_lib = { git = "https://github.com/YendorEngine/yendor", optional = true, 
     "roguelike",
 ] }
 
+[dev-dependencies]
+bevy                 = "0.9"
+unicode-segmentation = "1"
+
+# Doryen-rs
 [[example]]
-name              = "basic_bracket"
-path              = "examples/basic_bracket.rs"
+name = "doryen_alpha"
+path = "examples/doryen/alpha.rs"
+
+[[example]]
+name = "doryen_basic"
+path = "examples/doryen/basic.rs"
+
+[[example]]
+name = "doryen_blit"
+path = "examples/doryen/blit.rs"
+
+[[example]]
+name = "doryen_exit"
+path = "examples/doryen/exit.rs"
+
+[[example]]
+name = "doryen_fonts"
+path = "examples/doryen/fonts.rs"
+
+[[example]]
+name = "doryen_image"
+path = "examples/doryen/image.rs"
+
+[[example]]
+name = "doryen_perf"
+path = "examples/doryen/perf.rs"
+
+[[example]]
+name = "doryen_resize"
+path = "examples/doryen/resize.rs"
+
+[[example]]
+name = "doryen_subcell"
+path = "examples/doryen/subcell.rs"
+
+[[example]]
+name = "doryen_text_input"
+path = "examples/doryen/text_input.rs"
+
+[[example]]
+name = "doryen_unicode"
+path = "examples/doryen/unicode.rs"
+
+# Bracket-Lib
+[[example]]
+name              = "bracket_basic"
+path              = "examples/bracket_lib/basic.rs"
 required-features = ["bracket_lib"]
 
-[dev-dependencies]
-bevy = "0.9"
+# ASCII Terminal
+[[example]]
+name              = "ascii_terminal_basic"
+path              = "examples/ascii_terminal/basic.rs"
+required-features = ["ascii_terminal"]
