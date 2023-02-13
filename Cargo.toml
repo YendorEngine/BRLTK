@@ -20,12 +20,14 @@ members = [
 resolver = "2"
 
 [features]
-bracket = ["bevy_bracket_lib"]
-default = ["doryen", "yendor_lib"]
-doryen  = ["bevy_doryen"]
+ascii_terminal = ["bevy_ascii_terminal"]
+bracket        = ["bevy_bracket_lib"]
+default        = ["doryen", "yendor_lib"]
+doryen         = ["bevy_doryen"]
 
 [dependencies]
 bevy = { version = "0.9", default-features = false, features = ["bevy_render"] }
+bevy_ascii_terminal = { path = "crates/bevy_ascii_terminal", optional = true, version = "0.1" }
 bevy_bracket_lib = { path = "crates/bevy_bracket_lib", optional = true, version = "0.1" }
 bevy_doryen = { path = "crates/bevy_doryen", optional = true, version = "0.1" }
 brltk_common = { path = "crates/common", version = "0.1" }
