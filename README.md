@@ -5,6 +5,9 @@ An opinionated rougelike toolkit for bevy
 BRLTK lets you use [Bevy](https://github.com/bevyengine/bevy) with various roguelike libraries. Currently, it supports [doryen-rs](https://github.com/jice-nospam/doryen-rs) and [bracket-lib](https://github.com/amethyst/bracket-lib).
 
 <div align="center">
+    <a href="https://blog.rust-lang.org/2023/02/09/Rust-1.67.1.html">
+        <img src="https://img.shields.io/badge/supports%20rust-1.67+-blue" alt="rustc"/>
+    </a>
     <a href="https://crates.io/crates/brltk">
         <img src="https://img.shields.io/crates/v/brltk" alt="Crates.io"/>
     </a>
@@ -89,14 +92,6 @@ App::build()
         going_down: true,
     })
     .add_system(tick)
-    // Add your Bevy systems like usual. Excluding startup systems, which
-    // only run once, these systems are run during Doryen's update phase;
-    // i.e. 60 times per second.
-    .add_startup_system(init)
-    .add_system(input)
-    // The `RenderSystemExtensions` trait lets you add systems that should
-    // be run during Doryen's render phase.
-    .add_doryen_render_system(render)
     .run();
 ```
 
