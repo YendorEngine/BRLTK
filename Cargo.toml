@@ -21,8 +21,8 @@ resolver = "2"
 
 [features]
 ascii_terminal = ["bevy_ascii_terminal"]
-bracket        = ["bevy_bracket_lib"]
-default        = ["doryen", "yendor_lib"]
+bracket_lib    = ["bevy_bracket_lib"]
+default        = ["doryen", "yendor_lib", "ascii_terminal"]
 doryen         = ["bevy_doryen"]
 
 [dependencies]
@@ -38,4 +38,7 @@ yendor_lib = { git = "https://github.com/YendorEngine/yendor", optional = true, 
 [[example]]
 name              = "basic_bracket"
 path              = "examples/basic_bracket.rs"
-required-features = ["bevy_bracket_lib"]
+required-features = ["bracket_lib"]
+
+[dev-dependencies]
+bevy = "0.9"

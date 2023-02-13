@@ -3,7 +3,8 @@ use bevy_ascii_terminal::{
     Border, GridPoint, Pivot, Size2d, Terminal, TerminalFont, Tile, TileScaling,
 };
 
-#[derive(Default, Clone)]
+/// A builder for creating a terminal.
+#[derive(Debug, Clone)]
 pub struct TerminalBundleBuilder {
     pub(crate) depth: i32,
     pub(crate) size: UVec2,
@@ -17,6 +18,22 @@ pub struct TerminalBundleBuilder {
     pub(crate) clear_tile: Option<Tile>,
     pub(crate) font: Option<TerminalFont>,
     pub(crate) scaling: Option<TileScaling>,
+}
+
+impl Default for TerminalBundleBuilder {
+    fn default() -> Self {
+        Self {
+            depth: 0,
+            pos: None,
+            font: None,
+            pivot: None,
+            border: None,
+            scaling: None,
+            clear_tile: None,
+            auto_camera: true,
+            size: UVec2::new(80, 50),
+        }
+    }
 }
 
 impl TerminalBundleBuilder {
@@ -55,21 +72,25 @@ impl TerminalBundleBuilder {
         self
     }
 
+    /// Set the initial pivot of the terminal.
     pub fn with_pivot(mut self, pivot: Pivot) -> Self {
         self.pivot = Some(pivot);
         self
     }
 
+    /// Set the initial font of the terminal.
     pub fn with_font(mut self, font: TerminalFont) -> Self {
         self.font = Some(font);
         self
     }
 
+    /// Set the initial position of the terminal.
     pub fn with_position(mut self, pos: impl GridPoint) -> Self {
         self.pos = Some(pos.as_ivec2());
         self
     }
 
+    /// Set the clear tile of the terminal.
     pub fn with_clear_tile(mut self, clear_tile: impl Into<Tile>) -> Self {
         self.clear_tile = Some(clear_tile.into());
         self

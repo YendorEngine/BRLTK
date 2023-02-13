@@ -1,17 +1,16 @@
-//! `bevy_doryen` is a Bevy plugin that lets you use `Bevy` with the `doryen-rs`
-//! roguelike library.
+//! `bevy_ascii_terminal` is a Bevy plugin that lets you use `Bevy` with the `bevy_ascii_terminal` plugin.
 //!
 //! [Bevy]: https://bevyengine.org/
-//! [Doryen]: https://github.com/jice-nospam/doryen-rs
+//! [Bevy Ascii Terminal]: https://github.com/sarkahn/bevy_ascii_terminal
 
 #![forbid(unsafe_code)]
 #![warn(missing_docs)]
 
 use bevy_ascii_terminal::{AutoCamera, Terminal, TerminalBundle, TerminalPlugin};
 use brltk_common::Backend;
-use term_builder::TerminalBundleBuilder;
 
 mod term_builder;
+pub use term_builder::TerminalBundleBuilder;
 
 /// Re-export of the Doryen library types.
 pub mod ascii_terminal {
