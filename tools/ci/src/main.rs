@@ -5,19 +5,25 @@ use xshell::{cmd, Shell};
 
 bitflags! {
     struct Check: u32 {
-        const FORMAT = 0b00000001;
-        const CLIPPY = 0b00000010;
-        const TEST = 0b00001000;
-        const DOC_TEST = 0b00010000;
-        const DOC_CHECK = 0b00100000;
-        const COMPILE_CHECK = 0b100000000;
+        const FORMAT =          0b00000001;
+        const CLIPPY =           0b00000010;
+        const TEST =             0b00000100;
+        const DOC_TEST =        0b00001000;
+        const DOC_CHECK =       0b00010000;
+        const EXAMPLE_CHECK =  0b00100000;
+        const COMPILE_CHECK =  0b01000000;
     }
 }
 
 // This can be configured as needed
-const CLIPPY_FLAGS: [&str; 3] = [
+const CLIPPY_FLAGS: [&str; 8] = [
     "-Aclippy::type_complexity",
     "-Wclippy::doc_markdown",
+    "-Wclippy::redundant_else",
+    "-Wclippy::match_same_arms",
+    "-Wclippy::semicolon_if_nothing_returned",
+    "-Wclippy::explicit_iter_loop",
+    "-Wclippy::map_flatten",
     "-Dwarnings",
 ];
 
@@ -30,12 +36,13 @@ fn main() {
     let arguments = [
         ("lints", Check::FORMAT | Check::CLIPPY),
         ("test", Check::TEST),
-        ("doc", Check::DOC_TEST | Check::DOC_CHECK),
-        ("compile", Check::COMPILE_CHECK),
-        ("format", Check::FORMAT),
         ("clippy", Check::CLIPPY),
-        ("doc-check", Check::DOC_CHECK),
+        ("format", Check::FORMAT),
         ("doc-test", Check::DOC_TEST),
+        ("doc-check", Check::DOC_CHECK),
+        ("compile", Check::COMPILE_CHECK),
+        ("example-check", Check::EXAMPLE_CHECK),
+        ("doc", Check::DOC_TEST | Check::DOC_CHECK),
     ];
 
     let what_to_run = if let Some(arg) = std::env::args().nth(1).as_deref() {
@@ -96,6 +103,13 @@ fn main() {
         )
         .run()
         .expect("Please fix doc warnings in output above.");
+    }
+
+    if what_to_run.contains(Check::EXAMPLE_CHECK) {
+        // Build examples and check they compile
+        cmd!(sh, "cargo check --workspace --examples")
+            .run()
+            .expect("Please fix compiler errors for examples in output above.");
     }
 
     if what_to_run.contains(Check::COMPILE_CHECK) {

@@ -1,0 +1,13 @@
+[package]
+description = "handle examples in Bevy"
+edition     = "2021"
+license     = "MIT OR Apache-2.0"
+name        = "build-example-pages"
+publish     = false
+version     = "0.9.0"
+
+[dependencies]
+bitflags  = "1"
+serde     = { version = "1.0", features = ["derive"] }
+tera      = "1"
+toml_edit = "0.19"

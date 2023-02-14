@@ -2,7 +2,7 @@
 
 An opinionated rougelike toolkit for bevy
 
-BRLTK lets you use [Bevy](https://github.com/bevyengine/bevy) with various roguelike libraries. Currently, it supports [doryen-rs](https://github.com/jice-nospam/doryen-rs) and [bracket-lib](https://github.com/amethyst/bracket-lib).
+BRLTK lets you use [Bevy](https://github.com/bevyengine/bevy) with various roguelike libraries. Currently, it supports [doryen-rs](https://github.com/jice-nospam/doryen-rs), [bracket-lib](https://github.com/amethyst/bracket-lib), and [bevy_ascii_terminal](https://github.com/sarkahn/bevy_ascii_terminal)
 
 <div align="center">
     <a href="https://blog.rust-lang.org/2023/02/09/Rust-1.67.1.html">
@@ -33,9 +33,10 @@ BRLTK lets you use [Bevy](https://github.com/bevyengine/bevy) with various rogue
 The main branch is compatible with the latest Bevy release
 
 Compatibility of `BRLTK` versions:
+
 | `BRLTK` | `bevy` |
-| :-- | :-- |
-| `0.1.0` | `0.9` |
+| :------ | :----- |
+| `0.1.0` | `0.9`  |
 
 ## Getting Started
 
@@ -116,6 +117,7 @@ Bevy is only possible because of the hard work put into these foundational techn
 - [bevy](https://github.com/bevyengine/bevy): a refreshingly simple data-driven game engine built in Rust
 - [doryen-rs](https://github.com/jice-nospam/doryen-rs): Ascii roguelike library in rust with native and wasm support
 - [bracket-lib](https://github.com/amethyst/bracket-lib): bracket-lib is a wrapper of the bracket- set of crates designed initally for roguelike development (as RLTK) and later transitioned into a general use crate.
+- [bevy_ascii_terminal](https://github.com/sarkahn/bevy_ascii_terminal): A simple ascii terminal integrated into bevy's ecs framework.
 
 ## Thanks and Alternatives
 

@@ -1,0 +1,16 @@
+[package]
+edition = "2021"
+license = "Apache-2.0 OR MIT"
+name    = "bevy_ascii_terminal"
+publish = false
+readme  = "../../README.md"
+version = "0.1.0"
+
+[features]
+default = ["bevy_ascii_terminal/camera"]
+
+[dependencies]
+brltk_common = { path = "../common", version = "0.1" }
+
+bevy                = { version = "0.9", default-features = false }
+bevy_ascii_terminal = { version = "0.12" }

@@ -58,10 +58,15 @@ mod plugin;
 
 /// Crate prelude.
 pub mod prelude {
-    #[cfg(feature = "bevy_bracket_lib")]
+    #[cfg(feature = "ascii_terminal")]
+    pub use bevy_ascii_terminal;
+    #[cfg(feature = "ascii_terminal")]
+    pub use bevy_ascii_terminal::*;
+    #[cfg(feature = "bracket_lib")]
     pub use bevy_bracket_lib;
-    #[cfg(feature = "bevy_doryen")]
+    #[cfg(feature = "doryen")]
     pub use bevy_doryen;
+
     pub use brltk_common::*;
     // Yendor
     #[cfg(feature = "yendor_lib")]

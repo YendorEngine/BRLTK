@@ -99,3 +99,112 @@ jobs:
   #        run: cargo install --force cargo-deadlinks
   #      - name: Checks dead links
   #        run: cargo deadlinks
+
+  build-wasm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ubuntu-assets-cargo-build-wasm-stable-${{ hashFiles('**/Cargo.toml') }}
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          target: wasm32-unknown-unknown
+
+      - name: Check wasm
+        run: cargo check --target wasm32-unknown-unknown
+
+  check-missing-examples-in-docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: check for missing metadata
+        id: missing-metadata
+        run: cargo run -p build-example-pages -- check-missing
+
+      - name: check for missing update
+        id: missing-update
+        run: cargo run -p build-example-pages -- update
+
+      - name: Check for modified files
+        run: |
+          echo "if this step fails, run the following command and commit the changed file on your PR."
+          echo " > cargo run -p build-example-pages -- update"
+          git diff --quiet HEAD --
+
+      - name: Save PR number
+        if: ${{ failure() && github.event_name == 'pull_request' }}
+        run: |
+          mkdir -p ./missing-examples
+          echo ${{ github.event.number }} > ./missing-examples/NR
+
+      - name: log failed task - missing metadata
+        if: ${{ failure() && github.event_name == 'pull_request' && steps.missing-metadata.conclusion == 'failure' }}
+        run: touch ./missing-examples/missing-metadata
+
+      - name: log failed task - missing update
+        if: ${{ failure() && github.event_name == 'pull_request' && steps.missing-update.conclusion == 'failure' }}
+        run: touch ./missing-examples/missing-update
+
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() && github.event_name == 'pull_request' }}
+        with:
+          name: missing-examples
+          path: missing-examples/
+
+  msrv:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-msrv-${{ hashFiles('**/Cargo.toml') }}
+
+      - name: get MSRV
+        run: |
+          msrv=`cargo metadata --no-deps --format-version 1 | jq --raw-output '.packages[] | select(.name=="bevy") | .rust_version'`
+          echo "MSRV=$msrv" >> $GITHUB_ENV
+
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.MSRV }}
+
+      - name: Install alsa and udev
+        run: sudo apt-get update; sudo apt-get install --no-install-recommends libasound2-dev libudev-dev
+
+      - name: Run cargo check
+        id: check
+        run: cargo check
+
+      - name: Save PR number
+        if: ${{ failure() && github.event_name == 'pull_request' && steps.check.conclusion == 'failure' }}
+        run: |
+          mkdir -p ./msrv
+          echo ${{ github.event.number }} > ./msrv/NR
+
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() && github.event_name == 'pull_request' && steps.check.conclusion == 'failure' }}
+        with:
+          name: msrv
+          path: msrv/
