@@ -9,14 +9,8 @@ repository  = "https://github.com/YendorEngine/bevy_doryen"
 version     = "0.1.0"
 
 [workspace]
-exclude = ["benches"]
-members = [
-    "tools/ci",
-    # "tools/build-example-pages",
-    # "tools/build-wasm-examples",
-    # "errors",
-    "crates/*",
-]
+exclude  = ["benches"]
+members  = ["tools/ci", "tools/build-example-pages", "tools/build-wasm-examples", "crates/*"]
 resolver = "2"
 
 [features]
@@ -24,6 +18,8 @@ ascii_terminal = ["bevy_ascii_terminal"]
 bracket_lib    = ["bevy_bracket_lib"]
 default        = ["doryen", "yendor_lib"]
 doryen         = ["bevy_doryen"]
+
+ci_testing = ["bevy/bevy_ci_testing"]
 
 [dependencies]
 bevy = { version = "0.9", default-features = false, features = ["bevy_render"] }
@@ -44,45 +40,111 @@ unicode-segmentation = "1"
 name = "doryen_alpha"
 path = "examples/doryen/alpha.rs"
 
+[package.metadata.example.doryen_alpha]
+category    = "Doryen Examples"
+description = "shows how to use the alpha channel"
+name        = "Doryen Examples"
+wasm        = true
+
 [[example]]
 name = "doryen_basic"
 path = "examples/doryen/basic.rs"
+
+[package.metadata.example.doryen_basic]
+category    = "Doryen Examples"
+description = "shows basic setup with doryen-rs backend"
+name        = "Doryen Basic"
+wasm        = true
 
 [[example]]
 name = "doryen_blit"
 path = "examples/doryen/blit.rs"
 
+[package.metadata.example.doryen_blit]
+category    = "Doryen Examples"
+description = "shows how to blit from one surface to another"
+name        = "Doryen Blit"
+wasm        = true
+
 [[example]]
 name = "doryen_exit"
 path = "examples/doryen/exit.rs"
+
+[package.metadata.example.doryen_exit]
+category    = "Doryen Examples"
+description = "shows how to exit the application"
+name        = "Doryen Exit"
+wasm        = true
 
 [[example]]
 name = "doryen_fonts"
 path = "examples/doryen/fonts.rs"
 
+[package.metadata.example.doryen_fonts]
+category    = "Doryen Examples"
+description = "shows how to manipulate fonts"
+name        = "Doryen Fonts"
+wasm        = true
+
 [[example]]
 name = "doryen_image"
 path = "examples/doryen/image.rs"
+
+[package.metadata.example.doryen_image]
+category    = "Doryen Examples"
+description = "shows how to work with doryen images"
+name        = "Doryen Image"
+wasm        = true
 
 [[example]]
 name = "doryen_perf"
 path = "examples/doryen/perf.rs"
 
+[package.metadata.example.doryen_perf]
+category    = "Doryen Examples"
+description = "shows doryen-rs in a performance test"
+name        = "Doryen Perf"
+wasm        = true
+
 [[example]]
 name = "doryen_resize"
 path = "examples/doryen/resize.rs"
+
+[package.metadata.example.doryen_resize]
+category    = "Doryen Examples"
+description = "shows resizing the terminal"
+name        = "Doryen Resize"
+wasm        = true
 
 [[example]]
 name = "doryen_subcell"
 path = "examples/doryen/subcell.rs"
 
+[package.metadata.example.doryen_subcell]
+category    = "Doryen Examples"
+description = "shows using doryen-rs subcell rendering"
+name        = "Doryen Subcell"
+wasm        = true
+
 [[example]]
 name = "doryen_text_input"
 path = "examples/doryen/text_input.rs"
 
+[package.metadata.example.doryen_text_input]
+category    = "Doryen Examples"
+description = "shows basic text input"
+name        = "Doryen Text Input"
+wasm        = true
+
 [[example]]
 name = "doryen_unicode"
 path = "examples/doryen/unicode.rs"
+
+[package.metadata.example.doryen_unicode]
+category    = "Doryen Examples"
+description = "shows unicode support"
+name        = "Doryen Unicode"
+wasm        = true
 
 # Bracket-Lib
 [[example]]
@@ -90,8 +152,31 @@ name              = "bracket_basic"
 path              = "examples/bracket_lib/basic.rs"
 required-features = ["bracket_lib"]
 
+[package.metadata.example.bracket_basic]
+category    = "Bracket Lib Examples"
+description = "basic setup with bracket lib backend"
+name        = "Bracket Basic"
+wasm        = true
+
 # ASCII Terminal
 [[example]]
 name              = "ascii_terminal_basic"
 path              = "examples/ascii_terminal/basic.rs"
 required-features = ["ascii_terminal"]
+
+[package.metadata.example.ascii_terminal_basic]
+category    = "Bevy Ascii Terminal Examples"
+description = "basic setup with bevy ascii terminal backend"
+name        = "Bevy Ascii Terminal Basic"
+wasm        = true
+
+# Stress tests
+[[package.metadata.category]]
+description = """
+These examples are used to test the performance and stability of various parts of the engine in an isolated way.
+Due to the focus on performance it's recommended to run the stress tests in release mode:
+```sh
+cargo run --release --example <example name>
+```
+"""
+name = "Stress Tests"
