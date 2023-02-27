@@ -186,7 +186,7 @@ jobs:
           msrv=`cargo metadata --no-deps --format-version 1 | jq --raw-output '.packages[] | select(.name=="bevy") | .rust_version'`
           echo "MSRV=$msrv" >> $GITHUB_ENV
 
-      - uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: ${{ env.MSRV }}
 
