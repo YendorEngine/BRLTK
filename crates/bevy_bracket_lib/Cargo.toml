@@ -7,7 +7,7 @@ readme  = "../../README.md"
 version = "0.1.0"
 
 [dependencies]
-bevy                = { version = "0.9", default-features = false }
+bevy                = { version = "0.10", default-features = false }
 bracket-bevy        = { git = "https://github.com/amethyst/bracket-lib" }
 bracket-pathfinding = { git = "https://github.com/amethyst/bracket-lib" }
 brltk_common        = { path = "../common", version = "0.1" }

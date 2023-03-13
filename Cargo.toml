@@ -22,7 +22,7 @@ doryen         = ["bevy_doryen"]
 ci_testing = ["bevy/bevy_ci_testing"]
 
 [dependencies]
-bevy = { version = "0.9", default-features = false, features = ["bevy_render"] }
+bevy = { version = "0.10", default-features = false, features = ["bevy_render"] }
 bevy_ascii_terminal = { path = "crates/bevy_ascii_terminal", optional = true, version = "0.1" }
 bevy_bracket_lib = { path = "crates/bevy_bracket_lib", optional = true, version = "0.1" }
 bevy_doryen = { path = "crates/bevy_doryen", optional = true, version = "0.1" }
@@ -32,7 +32,7 @@ yendor_lib = { git = "https://github.com/YendorEngine/yendor", optional = true, 
 ] }
 
 [dev-dependencies]
-bevy                 = "0.9"
+bevy                 = "0.10"
 unicode-segmentation = "1"
 
 # Doryen-rs

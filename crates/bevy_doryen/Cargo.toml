@@ -9,7 +9,7 @@ version = "0.1.0"
 [dependencies]
 brltk_common = { path = "../common", version = "0.1" }
 
-bevy      = { version = "0.9", default-features = false }
+bevy      = { version = "0.10", default-features = false }
 doryen-rs = { git = "https://github.com/YendorEngine/doryen-rs", branch = "custom", version = "1.4.0" }
 image     = "0.24"
 

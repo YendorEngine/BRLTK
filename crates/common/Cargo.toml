@@ -5,4 +5,4 @@ name    = "brltk_common"
 version = "0.1.0"
 
 [dependencies]
-bevy = { version = "0.9", default-features = false }
+bevy = { version = "0.10", default-features = false }
